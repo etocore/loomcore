@@ -2,6 +2,7 @@
 
 import Head from 'next/head';
 import * as React from 'react';
+import EmailSignup from '@/components/EmailSignup';
 
 export default function HomePage() {
   return (
