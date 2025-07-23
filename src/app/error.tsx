@@ -12,13 +12,15 @@ export default function Error({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  React.useEffect(() => {}, [error]);
+  React.useEffect(() => {
+    // console.error(error); // disable if lint blocks it
+  }, [error]);
 
   return (
     <main>
       <section className='bg-white'>
         <div className='layout flex min-h-screen flex-col items-center justify-center text-center text-black'>
+          {/* @ts-expect-error: react-icons type bug */}
           <RiAlarmWarningFill
             size={60}
             className='drop-shadow-glow animate-flicker text-red-500'
