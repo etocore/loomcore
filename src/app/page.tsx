@@ -3,10 +3,11 @@
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import EmailSignup from '@/components/EmailSignup';
-import MVPPage from '@/components/MVPPage'; // This is your placeholder for the real MVP content
+import MVPPage from '@/components/MVPPage';
 
 export default function HomePage() {
   const [accessGranted, setAccessGranted] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const access = localStorage.getItem('emailSubmitted');
@@ -35,7 +36,7 @@ export default function HomePage() {
 
               <div className="mt-8 flex flex-col items-center space-y-4">
                 <button
-                  onClick={() => setAccessGranted(false)} // triggers modal
+                  onClick={() => setShowModal(true)}
                   className="rounded-md bg-black px-6 py-3 text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 transition"
                 >
                   Join Early Access
@@ -51,7 +52,15 @@ export default function HomePage() {
             </div>
           </section>
 
-          <EmailSignup onSuccess={() => setAccessGranted(true)} />
+          {showModal && (
+            <EmailSignup
+              onSuccess={() => {
+                setAccessGranted(true);
+                setShowModal(false);
+              }}
+              onClose={() => setShowModal(false)}
+            />
+          )}
         </main>
       )}
     </>
